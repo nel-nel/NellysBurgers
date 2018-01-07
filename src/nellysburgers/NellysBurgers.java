@@ -1,4 +1,3 @@
-
 package nellysburgers;
 
 import static nellysburgers.Addition.*;
@@ -23,23 +22,23 @@ import static nellysburgers.Meat.*;
         // a) Healthy burger (on a brown rye bread roll)
         // The healthy burger can have a total of 6 items (Additions) in total.
         // b) Deluxe hamburger - comes with chips and drinks as additions, but no extra additions are allowed.
-        // hint:  You have to find a way to automatically add these new additions at the time the deluxe burger
+        //find a way to automatically add these new additions at the time the deluxe burger
         // object is created, and then prevent other additions being made.
         //  All 3 classes have a method FinalizeOrder that shows the base price of the hamburger
         // plus all additionals, each showing the addition name, and addition price, and a grand total for the
         // burger*/
-
 public class NellysBurgers {
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Hamburger hamburger1 = new Hamburger(PORK,WHITE,3,4);
+        Hamburger hamburger1 = new Hamburger(PORK, WHITE, 3, 4);
         hamburger1.add(Addition.TOMATOE);
         hamburger1.add(Addition.TOMATOE);
         hamburger1.add(Addition.TOMATOE);
         hamburger1.finalizeOrder();
-        Hamburger hamburger2 = new Hamburger(PORK,WHITE,3,4);
+        Hamburger hamburger2 = new Hamburger(PORK, WHITE, 3, 4);
         hamburger2.add(LETTUCE);
         hamburger2.add(LETTUCE);
         hamburger2.finalizeOrder();
@@ -48,8 +47,8 @@ public class NellysBurgers {
         healthyHamburger.finalizeOrder();
         healthyHamburger.add(CARROTS);
         healthyHamburger.finalizeOrder();
-        DeluxBurger delux = new DeluxBurger(BEEF, BROWN); // Chips and Drinks added automatically
+        Hamburger delux = new DeluxBurger(BEEF, BROWN, 6, 2); // Chips and Drinks added automatically
         delux.add(TOMATOE);
-    }   
-    
+    }
+
 }

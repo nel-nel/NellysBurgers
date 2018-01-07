@@ -1,6 +1,5 @@
 package nellysburgers;
 
-
 public enum Bread {
-    BROWN,WHITE,RICE,GLUTEN_FREE,BROWN_RYE;
+    BROWN, WHITE, GLUTEN_FREE, BROWN_RYE;
 }

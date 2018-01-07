@@ -8,54 +8,54 @@ package nellysburgers;
          // This burger has a base price and the additions are all seperately priced.
         // Create a Hamburger class to deal with all the above.
         // The constructor should only include the roll type and meat type 
-*/
-  
-    
+ */
 public class Hamburger {
-    private Meat meat; 
-    private Bread bread; 
+
+    public Meat meat;
+    private Bread bread;
     private double basePrice;
-    private int maxAdditions; 
+    private int maxAdditions;
     private double finalPrice;
-    private StringBuilder receipt ;
-    private int countAdditions; 
-        
-    public Hamburger(Meat meat,Bread bread,int basePrice, int maxAdditions) {
-            // type of meat and bread 
-            this.meat = meat;
-            this.bread = bread;
-            this.basePrice = basePrice;
-            this.maxAdditions = maxAdditions;
-            this.finalPrice = basePrice;
-            receipt = new StringBuilder("Receipt:\n");
-            countAdditions = 0;
-            recalculate(meat); // the price is different for different types of meats
-            receipt.append(this.getClass().getSimpleName()).append("(").append(meat.toString())
-                    .append(")").append(":").append(finalPrice).append(";\n");
-            System.out.printf("\n\nORDERING a %s with %s for %.2f$.",this.getClass().getSimpleName(), meat.toString(),finalPrice);
+    private StringBuilder receipt;
+    private int countAdditions;
+
+    public Hamburger(Meat meat, Bread bread, int basePrice, int maxAdditions) {
+        // type of meat and bread 
+        this.meat = meat;
+        this.bread = bread;
+        this.basePrice = basePrice;
+        this.maxAdditions = maxAdditions;
+        this.finalPrice = basePrice;
+        receipt = new StringBuilder("Receipt:\n");
+        countAdditions = 0;
+        recalculate(meat); // the price is different for different types of meats
+        receipt.append(this.getClass().getSimpleName()).append("(").append(meat.toString())
+                .append(")").append(":").append(finalPrice).append(";\n");
+        System.out.printf("\n\nORDERING a %s with %s for %.2f$.", this.getClass().getSimpleName(), meat.toString(), finalPrice);
+    }
+
+    private void recalculate(Extras extra) {
+        //keeps the finalPrice updated 
+        this.finalPrice += extra.getCost();
+    }
+
+    //add additional items, call recalculate(), check for the maximum of additions, save in receipt
+    public void add(Addition addition) {
+        if (countAdditions >= maxAdditions) {
+            System.out.printf("\nYou can't add more than %d for this Burger!", maxAdditions);
+        } else {
+            countAdditions++;
+            recalculate(addition);
+            System.out.printf("\nadding %s for an extra:%.2f$", addition.toString(), addition.getCost());
+            receipt.append(addition.toString()).append(":")
+                    .append(addition.getCost()).append("\n");
         }
-    private void recalculate(Extras extra){
-       this.finalPrice+=extra.getCost();
     }
-    
- 
-    //add additional items, call recalculate, check for the maximum of additions, save in receipt
-    public void add(Addition addition){
-       if(countAdditions>=maxAdditions){
-          System.out.printf("\nYou can't add more than %d for this Burger!",maxAdditions);
-      }else{
-      countAdditions++;  
-      recalculate(addition);
-      System.out.printf("\nadding %s for an extra:%.2f$",addition.toString(),addition.getCost());
-      receipt.append(addition.toString()).append(":")
-              .append(addition.getCost()).append("\n");
-      } 
+
+    public double finalizeOrder() {
+        String finalPriceString = String.format("%.2f$.\n", this.finalPrice);
+        receipt.append("              Total:").append(finalPriceString);
+        System.out.printf("\nORDER FINALIZED!\n%s", receipt); //print receipt
+        return this.finalPrice;
     }
-    
-  public double finalizeOrder(){ 
-      String finalPriceString = String.format("%.2f$.\n", this.finalPrice);
-      receipt.append("              Total:").append(finalPriceString);
-      System.out.printf("\nORDER FINALIZED!\n%s", receipt);
-      return this.finalPrice;
-  }  
 }
