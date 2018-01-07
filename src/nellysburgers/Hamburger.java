@@ -1,4 +1,5 @@
 package nellysburgers;
+
 /*The basic hamburger should have the following items.
         // bread roll type, meat and up to 4 additional additions (things like lettuce, tomato, carrot, etc) that
         // the customer can select to be added to the burger. Each one of these items gets charged an additional
@@ -8,40 +9,53 @@ package nellysburgers;
         // Create a Hamburger class to deal with all the above.
         // The constructor should only include the roll type and meat type 
 */
-
-    
+  
     
 public class Hamburger {
-    private Meat meat;
+    private Meat meat; 
     private Bread bread; 
-    private final static double BASEPRICE = 5;
+    private double basePrice;
+    private int maxAdditions; 
     private double finalPrice;
-    private StringBuilder added ;
+    private StringBuilder receipt ;
     private int countAdditions; 
         
-    public Hamburger(Meat meat,Bread bread) {
+    public Hamburger(Meat meat,Bread bread,int basePrice, int maxAdditions) {
+            // type of meat and bread 
             this.meat = meat;
             this.bread = bread;
-            this.finalPrice = BASEPRICE;
-            added = new StringBuilder();
-            countAdditions = 0; 
-            System.out.println("Ordering a burger. Wanna have some additions?");
+            this.basePrice = basePrice;
+            this.maxAdditions = maxAdditions;
+            this.finalPrice = basePrice;
+            receipt = new StringBuilder("Receipt:\n");
+            countAdditions = 0;
+            recalculate(meat); // the price is different for different types of meats
+            receipt.append(this.getClass().getSimpleName()).append("(").append(meat.toString())
+                    .append(")").append(":").append(finalPrice).append(";\n");
+            System.out.printf("\n\nORDERING a %s with %s for %.2f$.",this.getClass().getSimpleName(), meat.toString(),finalPrice);
         }
-    
-  public void add(Addition addition){
-       if(countAdditions>=4){
-          System.out.println("You can't add more than 4 additions per Burger!");
-      }else{
-      countAdditions++;         
-      double additionCost = addition.additional_cost();
-      this.finalPrice+=additionCost;
-      System.out.printf("%s is added for an extra:%f%n\nFinal cost: %f%n \n",addition.toString(),additionCost,finalPrice);
-      added.append(" " + addition.toString()+",");
-      }
+    private void recalculate(Extras extra){
+       this.finalPrice+=extra.getCost();
     }
     
-  public double finalizeOrder(){
-      System.out.printf("ORDER FINALIZED!\nAdditions:%s \nFinal cost: %f%n.\r", added, finalPrice);
+ 
+    //add additional items, call recalculate, check for the maximum of additions, save in receipt
+    public void add(Addition addition){
+       if(countAdditions>=maxAdditions){
+          System.out.printf("\nYou can't add more than %d for this Burger!",maxAdditions);
+      }else{
+      countAdditions++;  
+      recalculate(addition);
+      System.out.printf("\nadding %s for an extra:%.2f$",addition.toString(),addition.getCost());
+      receipt.append(addition.toString()).append(":")
+              .append(addition.getCost()).append("\n");
+      } 
+    }
+    
+  public double finalizeOrder(){ 
+      String finalPriceString = String.format("%.2f$.\n", this.finalPrice);
+      receipt.append("              Total:").append(finalPriceString);
+      System.out.printf("\nORDER FINALIZED!\n%s", receipt);
       return this.finalPrice;
   }  
 }

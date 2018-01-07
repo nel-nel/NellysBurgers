@@ -1,5 +1,11 @@
 
 package nellysburgers;
+
+import static nellysburgers.Addition.*;
+import static nellysburgers.Bread.*;
+import static nellysburgers.Meat.*;
+
+
 /*The purpose of the application is to help a ficticious company called Nellys Burgers to manage
         // their process of selling hamburgers.
         // Our application will help Nelly to select types of burgers, some of the additional items (additions) to
@@ -14,36 +20,36 @@ package nellysburgers;
         // Create a Hamburger class to deal with all the above.
         // The constructor should only include the roll type, meat type 
         // Also create two extra varieties of Hamburgers (classes) to cater for
-        // a) Healthy burger (on a brown rye bread roll), plus two addition items can be added.
+        // a) Healthy burger (on a brown rye bread roll)
         // The healthy burger can have a total of 6 items (Additions) in total.
-        // hint:  you probably want to process the 2 additional items in this new class, not the base class,
-        // since the 2 additions are only appropriate for this new class.
         // b) Deluxe hamburger - comes with chips and drinks as additions, but no extra additions are allowed.
         // hint:  You have to find a way to automatically add these new additions at the time the deluxe burger
         // object is created, and then prevent other additions being made.
-        //  All 3 classes should have a method that can be called anytime to show the base price of the hamburger
+        //  All 3 classes have a method FinalizeOrder that shows the base price of the hamburger
         // plus all additionals, each showing the addition name, and addition price, and a grand total for the
-        // burger
-        // For the two additional classes this may require you to be looking at the base class for pricing and then
-        // adding totals onto that.*/
-
-import nellysburgers.Bread;
-import nellysburgers.Hamburger;
-import javax.swing.text.html.HTMLDocument;
+        // burger*/
 
 public class NellysBurgers {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Hamburger hamburger = new Hamburger(Meat.PORK,Bread.WHITE);
-        hamburger.add(Addition.TOMATOE);
-        hamburger.add(Addition.TOMATOE);
-        hamburger.add(Addition.TOMATOE);
-        hamburger.finalizeOrder();
-        Hamburger hamburger2 = new Hamburger(Meat.PORK,Bread.WHITE);
-        hamburger2.add(Addition.LETTUCE);
-        hamburger2.add(Addition.LETTUCE);
-    }
+        Hamburger hamburger1 = new Hamburger(PORK,WHITE,3,4);
+        hamburger1.add(Addition.TOMATOE);
+        hamburger1.add(Addition.TOMATOE);
+        hamburger1.add(Addition.TOMATOE);
+        hamburger1.finalizeOrder();
+        Hamburger hamburger2 = new Hamburger(PORK,WHITE,3,4);
+        hamburger2.add(LETTUCE);
+        hamburger2.add(LETTUCE);
+        hamburger2.finalizeOrder();
+        Hamburger healthyHamburger = new HealthyBurger(BEEF);
+        healthyHamburger.add(LETTUCE);
+        healthyHamburger.finalizeOrder();
+        healthyHamburger.add(CARROTS);
+        healthyHamburger.finalizeOrder();
+        DeluxBurger delux = new DeluxBurger(BEEF, BROWN); // Chips and Drinks added automatically
+        delux.add(TOMATOE);
+    }   
     
 }
