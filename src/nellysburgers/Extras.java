@@ -6,6 +6,6 @@
 package nellysburgers;
 
 public interface Extras {
-
     double getCost();
+    void changePrice(double newPrice);
 }

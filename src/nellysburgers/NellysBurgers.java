@@ -28,7 +28,6 @@ import static nellysburgers.Meat.*;
         // plus all additionals, each showing the addition name, and addition price, and a grand total for the
         // burger*/
 public class NellysBurgers {
-
     /**
      * @param args the command line arguments
      */
@@ -48,7 +47,8 @@ public class NellysBurgers {
         healthyHamburger.add(CARROTS);
         healthyHamburger.finalizeOrder();
         Hamburger delux = new DeluxBurger(BEEF, BROWN, 6, 2); // Chips and Drinks added automatically
-        delux.add(TOMATOE);
+        delux.add(TOMATOE);// not allowed
+        delux.finalizeOrder();
     }
 
 }

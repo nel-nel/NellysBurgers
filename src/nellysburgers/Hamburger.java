@@ -28,13 +28,13 @@ public class Hamburger {
         this.finalPrice = basePrice;
         receipt = new StringBuilder("Receipt:\n");
         countAdditions = 0;
-        recalculate(meat); // the price is different for different types of meats
+        recalculatePrice(meat); // the price is different for different types of meats
         receipt.append(this.getClass().getSimpleName()).append("(").append(meat.toString())
                 .append(")").append(":").append(finalPrice).append(";\n");
         System.out.printf("\n\nORDERING a %s with %s for %.2f$.", this.getClass().getSimpleName(), meat.toString(), finalPrice);
     }
 
-    private void recalculate(Extras extra) {
+    private void recalculatePrice(Extras extra) {
         //keeps the finalPrice updated 
         this.finalPrice += extra.getCost();
     }
@@ -45,7 +45,7 @@ public class Hamburger {
             System.out.printf("\nYou can't add more than %d for this Burger!", maxAdditions);
         } else {
             countAdditions++;
-            recalculate(addition);
+            recalculatePrice(addition);
             System.out.printf("\nadding %s for an extra:%.2f$", addition.toString(), addition.getCost());
             receipt.append(addition.toString()).append(":")
                     .append(addition.getCost()).append("\n");

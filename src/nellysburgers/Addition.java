@@ -16,10 +16,12 @@ public enum Addition implements Extras {
 
     @Override
     public double getCost() {
+        //addition cost
         return this.price;
     }
 
-    void changePrice(double newPrice) {
+    @Override
+    public void changePrice(double newPrice) {
         this.price = newPrice;
     }
 }

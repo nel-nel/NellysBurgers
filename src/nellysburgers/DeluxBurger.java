@@ -13,9 +13,10 @@ public class DeluxBurger extends Hamburger {
     public DeluxBurger(Meat meat, Bread bread, int basePrice, int maxAdditions) {
         super(meat, bread, basePrice, maxAdditions);
         // adding chips and drinks automatically
+        
         Addition deluxChips = CHIPS;
         Addition deluxDrink = DRINK;
-        deluxChips.changePrice(0.0);//PROMOTION!!
+        deluxChips.changePrice(0.0);//PROMOTION!! 
         deluxDrink.changePrice(0.0);//PROMOTION!!
         super.add(CHIPS);
         super.add(DRINK);
